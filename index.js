@@ -3,6 +3,7 @@ import { Application } from './engine/Application.js';
 import { Renderer } from './Renderer.js';
 import { Physics } from './Physics.js';
 import { Camera } from './Camera.js';
+import { Model } from './Model.js'
 import { SceneLoader } from './SceneLoader.js';
 import { SceneBuilder } from './SceneBuilder.js';
 
@@ -51,8 +52,8 @@ class App extends Application {
         const t = this.time = performance.now();
         const dt = (this.time - this.startTime) * 0.001;
         this.startTime = this.time;
-
-        this.camera.update(dt);
+        this.camera.update(dt, this.scene.nodes[4]);
+        this.camera.updateModel(dt, this.scene.nodes[4])
         this.physics.update(dt);
     }
 

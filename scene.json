@@ -53,6 +53,14 @@
       "translation": [3, 0.1, -1],
       "rotation": [0, 1, 0],
       "scale": [1, 0.1, 1]
+    },
+    {
+      "type": "model",
+      "mesh": 2,
+      "texture": 1,
+      "translation": [0, 0, 0],
+      "rotation": [0, 0, 0],
+      "scale": [100, 1, 100]
     }
   ],
   "textures": [
@@ -61,6 +69,7 @@
   ],
   "meshes": [
     "./models/cube.json",
-    "./models/pyramid.json"
+    "./models/pyramid.json",
+    "./models/plane.json"
   ]
 }

@@ -22,16 +22,21 @@ export class Camera extends Node {
         mat4.perspective(this.projection, this.fov, this.aspect, this.near, this.far);
     }
 
-    update(dt) {
-        const c = this;
+    updateModel(dt, model) {
+
+        const c = model;
 
         const forward = vec3.set(vec3.create(),
             -Math.sin(c.rotation[1]), 0, -Math.cos(c.rotation[1]));
         const right = vec3.set(vec3.create(),
             Math.cos(c.rotation[1]), 0, -Math.sin(c.rotation[1]));
 
+        const rotRight = vec3.set(vec3.create(),
+            0, Math.PI/128, 0);
+
         // 1: add movement acceleration
         const acc = vec3.create();
+        const rot = vec3.create();
         if (this.keys['KeyW']) {
             vec3.add(acc, acc, forward);
         }
@@ -39,20 +44,20 @@ export class Camera extends Node {
             vec3.sub(acc, acc, forward);
         }
         if (this.keys['KeyD']) {
-            vec3.add(acc, acc, right);
+            //vec3.add(acc, acc, right);
+            vec3.sub(rot, rot, rotRight);
         }
         if (this.keys['KeyA']) {
-            vec3.sub(acc, acc, right);
+            //vec3.sub(acc, acc, right);
+            vec3.add(rot, rot, rotRight);
         }
 
-        // 2: update velocity
         vec3.scaleAndAdd(c.velocity, c.velocity, acc, dt * c.acceleration);
+        vec3.scaleAndAdd(c.rotation, c.rotation, rot, 1)
 
         // 3: if no movement, apply friction
         if (!this.keys['KeyW'] &&
-            !this.keys['KeyS'] &&
-            !this.keys['KeyD'] &&
-            !this.keys['KeyA'])
+            !this.keys['KeyS'])
         {
             vec3.scale(c.velocity, c.velocity, 1 - c.friction);
         }
@@ -62,6 +67,12 @@ export class Camera extends Node {
         if (len > c.maxSpeed) {
             vec3.scale(c.velocity, c.velocity, c.maxSpeed / len);
         }
+    }
+
+    update(dt, model) {
+        const c = this;
+        c.rotation[0] = -Math.PI/6; c.rotation[1] = model.rotation[1]; c.rotation[2] = model.rotation[2];
+        c.translation[0] = model.translation[0]; c.translation[1] = model.translation[1] +2; c.translation[2] = model.translation[2];
     }
 
     enable() {

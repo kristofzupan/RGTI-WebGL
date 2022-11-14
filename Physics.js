@@ -68,6 +68,9 @@ export class Physics {
             return;
         }
 
+        /*if ((a === this.scene.nodes[2] && b === this.scene.nodes[4]) || (a === this.scene.nodes[4] && b === this.scene.nodes[2])) {
+            this.scene.nodes.splice(2, 1)
+        }*/
         // Move node A minimally to avoid collision.
         const diffa = vec3.sub(vec3.create(), bBox.max, aBox.min);
         const diffb = vec3.sub(vec3.create(), aBox.max, bBox.min);
