@@ -2,7 +2,8 @@
   "nodes": [
     {
       "type": "camera",
-      "translation": [0, 5, 0],
+      "translation": [0, 1, 0],
+      "rotation": [0, 0, 0],
       "aabb": {
         "min": [-0.2, -0.2, -0.2],
         "max": [0.2, 0.2, 0.2]
@@ -16,32 +17,25 @@
       "type": "model",
       "mesh": 0,
       "texture": 0,
-      "translation": [45, -2, -43],
-      "scale": [1, 0, 1]
-    },
-    {
-      "type": "model",
-      "mesh": 1,
-      "texture": 0,
-      "translation": [45, -2, -43],
-      "scale": [1, 0, 1]
+      "aabb": {
+        "min": [-1, -1, -1],
+        "max": [1, 1, 1]
+      },
+      "translation": [3, 0.1, -1],
+      "rotation": [0, 0, 0],
+      "scale": [1, 0.1, 1]
     },
     {
       "type": "model",
       "mesh": 1,
       "texture": 0,
       "translation": [0, 0, 0],
-      "scale": [50, 0, 50]
-    },
-    {
-      "type": "model",
-      "mesh": 1,
-      "texture": 0,
-      "translation": [41, 1, -38],
-      "scale": [1, 0, 1]
+      "rotation": [0, 0, 0],
+      "scale": [100, 1, 100]
     }
-],
+  ],
   "textures": [
+    "./images/16x16.png",
     "./images/track.png"
   ],
   "meshes": [
