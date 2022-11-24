@@ -64,9 +64,10 @@ Node.defaults = {
     rotation: [0, 0, 0],
     scale: [1, 1, 1],
     velocity: [0, 0, 0],
-    maxSpeed: 10,
-    friction: 0.4,
-    acceleration: 5,
+    maxSpeed: 100,
+    frictionX: 0.01,
+    frictionY: 0.2,
+    acceleration: 15,
     aabb: {
         min: [0, 0, 0],
         max: [0, 0, 0],

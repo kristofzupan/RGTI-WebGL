@@ -49,11 +49,12 @@ class App extends Application {
     }
 
     update() {
+        //console.log("update")
         const t = this.time = performance.now();
         const dt = (this.time - this.startTime) * 0.001;
         this.startTime = this.time;
-        this.camera.update(dt, this.scene.nodes[4]);
-        this.camera.updateModel(dt, this.scene.nodes[4])
+        this.camera.update(dt, this.scene.nodes[1]);
+        this.camera.updateModel(dt, this.scene.nodes[1])
         this.physics.update(dt);
     }
 
