@@ -42,20 +42,7 @@
     }
 ],
   "textures": [
-    "./images/track.png",
-    "./images/trauca.jpg",
-    "./images/cesta_ozko.jpg",
-    "./images/cesta_ozko90.jpg",
-    "./images/cesta_ozko180.jpg",
-    "./images/cesta_ozko270.jpg",
-    "./images/cesta_siroko.jpg",
-    "./images/cesta_siroko90.jpg",
-    "./images/cesta_siroko180.jpg",
-    "./images/cesta_siroko270.jpg",
-    "./images/cesta_straight.jpg",
-    "./images/cesta_straight90.jpg",
-    "./images/cesta_straight180.jpg",
-    "./images/cesta_straight270.jpg"
+    "./images/track.png"
   ],
   "meshes": [
     "./models/cube.json",
