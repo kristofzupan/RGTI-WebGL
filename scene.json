@@ -36,15 +36,14 @@
     {
       "type": "model",
       "mesh": 0,
-      "texture": 3,
+      "texture": 2,
       "aabb": {
-        "min": [0, 0, 0],
-        "max": [0, 0, 0]
+        "min": [-1, -1, -1],
+        "max": [1, 1, 1]
       },
-      "translation": [-30, 1, -5],
+      "translation": [0, 1, -1],
       "rotation": [0, 0, 0],
-      "scale": [1, 1, 1],
-      "transmittance": 1
+      "scale": [1, 1, 1]
     },
     {
       "type": "model",
@@ -58,13 +57,27 @@
       "rotation": [0, 0, 0],
       "scale": [1, 1, 1],
       "transmittance": 0.7
+    },
+    {
+      "type": "model",
+      "mesh": 0,
+      "texture": 4,
+      "aabb": {
+        "min": [-1, -1, -1],
+        "max": [1, 1, 1]
+      },
+      "translation": [-15, 1, 24],
+      "rotation": [0, 1.57, 0],
+      "scale": [10, 5, 0.1],
+      "transmittance": 0.1
     }
   ],
   "textures": [
     "./images/16x16.png",
     "./images/track.png",
     "./images/slon.png",
-    "./images/zirafa.png"
+    "./images/zirafa.png",
+    "./images/black.png"
   ],
   "meshes": [
     "./models/cube.json",

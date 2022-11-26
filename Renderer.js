@@ -9,7 +9,11 @@ export class Renderer {
     constructor(gl) {
         this.gl = gl;
 
-        gl.clearColor(1, 1, 1, 1);
+        //modro nebo
+        gl.clear(gl.DEPTH_BUFFER_BIT);
+        gl.clearColor(182/255, 222/255, 233/255, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT)
+
         gl.enable(gl.DEPTH_TEST);
         gl.enable(gl.CULL_FACE);
         gl.enable(gl.BLEND);
