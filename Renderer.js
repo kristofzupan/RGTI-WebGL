@@ -95,8 +95,11 @@ export class Renderer {
         const gl = this.gl;
         return WebGL.createTexture(gl, {
             image : texture,
-            min   : gl.NEAREST,
-            mag   : gl.NEAREST
+            min   : gl.LINEAR_MIPMAP_LINEAR,
+            mag   : gl.LINEAR,
+            mip   : true,
+            wrapS : gl.CLAMP_TO_EDGE,
+            wrapT : gl.CLAMP_TO_EDGE
         });
     }
 
