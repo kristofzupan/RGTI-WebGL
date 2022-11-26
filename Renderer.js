@@ -12,6 +12,8 @@ export class Renderer {
         gl.clearColor(1, 1, 1, 1);
         gl.enable(gl.DEPTH_TEST);
         gl.enable(gl.CULL_FACE);
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
         this.programs = WebGL.buildPrograms(gl, shaders);
     }
@@ -54,6 +56,7 @@ export class Renderer {
                     gl.activeTexture(gl.TEXTURE0);
                     gl.bindTexture(gl.TEXTURE_2D, node.gl.texture);
                     gl.uniform1i(uniforms.uTexture, 0);
+                    gl.uniform1f(uniforms.uTransmittance, node.transmittance);
                     gl.drawElements(gl.TRIANGLES, node.gl.indices, gl.UNSIGNED_SHORT, 0);
                 }
             },
@@ -95,9 +98,9 @@ export class Renderer {
         const gl = this.gl;
         return WebGL.createTexture(gl, {
             image : texture,
+            mip   : true,
             min   : gl.LINEAR_MIPMAP_LINEAR,
             mag   : gl.LINEAR,
-            mip   : true,
             wrapS : gl.CLAMP_TO_EDGE,
             wrapT : gl.CLAMP_TO_EDGE
         });

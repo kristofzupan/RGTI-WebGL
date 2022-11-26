@@ -17,6 +17,7 @@ const fragment = `#version 300 es
 precision mediump float;
 
 uniform mediump sampler2D uTexture;
+uniform float uTransmittance;
 
 in vec2 vTexCoord;
 
@@ -24,6 +25,8 @@ out vec4 oColor;
 
 void main() {
     oColor = texture(uTexture, vTexCoord);
+    oColor = oColor * uTransmittance;
+    oColor.w = uTransmittance;
 }
 `;
 

@@ -6,6 +6,7 @@ import { Camera } from './Camera.js';
 import { Model } from './Model.js'
 import { SceneLoader } from './SceneLoader.js';
 import { SceneBuilder } from './SceneBuilder.js';
+import { mat4 } from './lib/gl-matrix-module.js';
 
 class App extends Application {
 
@@ -13,10 +14,13 @@ class App extends Application {
         const gl = this.gl;
 
         this.renderer = new Renderer(gl);
-        this.time = performance.now();
-        this.startTime = this.time;
         this.aspect = 1;
+        
+        this.casZacetka = Date.now()
+        this.casElement = document.getElementById("cas");
 
+        this.pathGhost = [[-30, 1, -5],[-30, 1, -30],[1, 1, -30],[1, 1, -5]];
+        this.pathGhostRotation = [[0, Math.PI/2, 0],[0, Math.PI, 0],[0, -Math.PI/2, 0],[0, 0, 0]]
         await this.load('scene.json');
 
         this.canvas.addEventListener('click', e => this.canvas.requestPointerLock());
@@ -27,6 +31,9 @@ class App extends Application {
                 this.camera.disable();
             }
         });
+
+        this.time = performance.now();
+        this.startTime = this.time;
     }
 
     async load(uri) {
@@ -49,10 +56,63 @@ class App extends Application {
     }
 
     update() {
-        //console.log("update")
         const t = this.time = performance.now();
+
+        const d = new Date(Date.now() - this.casZacetka);
+        this.casElement.innerHTML = d.toString()[19] + d.toString()[20] + d.toString()[21] + d.toString()[22] + d.toString()[23]
+        this.casElement.innerHTML = this.casElement.innerHTML + ":" + d.getMilliseconds()
+
         const dt = (this.time - this.startTime) * 0.001;
         this.startTime = this.time;
+
+        //// Duhec pot in rotatcija
+        this.duhec = this.scene.nodes[4];
+
+        let rotacija = Math.round(this.duhec.rotation[1] * (180/Math.PI))
+        let ciljnaRotacija = Math.round(this.pathGhostRotation[this.duhec.pathIndex][1] * (180/Math.PI))
+
+        if (Math.round(this.duhec.translation[0]) === this.pathGhost[this.duhec.pathIndex][0] && Math.round(this.duhec.translation[2]) === this.pathGhost[this.duhec.pathIndex][2]) {
+            if (rotacija === ciljnaRotacija) {
+                this.duhec.pathIndex++
+                if (this.duhec.pathIndex === this.pathGhost.length) {
+                    this.duhec.pathIndex = 0;
+                }
+            }
+        }
+
+        if (Math.round(this.duhec.translation[0]) === this.pathGhost[this.duhec.pathIndex][0]) {
+            this.duhec.translation[0] = Math.round(this.duhec.translation[0])
+        } else if (this.duhec.translation[0] > this.pathGhost[this.duhec.pathIndex][0]) {
+            this.duhec.translation[0] -= 8*dt
+        } else if (this.duhec.translation[0] < this.pathGhost[this.duhec.pathIndex][0]){
+            this.duhec.translation[0] += 8*dt
+        }
+
+        if (Math.round(this.duhec.translation[2]) === this.pathGhost[this.duhec.pathIndex][2]) {
+            this.duhec.translation[2] = Math.round(this.duhec.translation[2])
+        } else if (this.duhec.translation[2] > this.pathGhost[this.duhec.pathIndex][2]) {
+            this.duhec.translation[2] -= 8*dt
+        } else if (this.duhec.translation[2] < this.pathGhost[this.duhec.pathIndex][2]){
+            this.duhec.translation[2] += 8*dt
+        }
+        ///// Duhec rotacija
+        const razdalja = Math.sqrt(((this.pathGhost[this.duhec.pathIndex][0]-this.duhec.translation[0])*(this.pathGhost[this.duhec.pathIndex][0]-this.duhec.translation[0])) + ((this.duhec.translation[2]-this.pathGhost[this.duhec.pathIndex][2])*(this.duhec.translation[2]-this.pathGhost[this.duhec.pathIndex][2])))
+        if (Math.round(razdalja) === 0) {
+            this.duhec.rotation[1] = this.pathGhostRotation[this.duhec.pathIndex][1]
+        }
+        if (razdalja < 10) {
+            rotacija = Math.round(this.duhec.rotation[1] * (180/Math.PI))
+            ciljnaRotacija = Math.round(this.pathGhostRotation[this.duhec.pathIndex][1] * (180/Math.PI))
+            if (rotacija === ciljnaRotacija) {
+                this.duhec.rotation = this.duhec.rotation
+            } else if (rotacija > ciljnaRotacija) {
+                this.duhec.rotation[1] -= 1*Math.PI/180;
+            } else if (rotacija < ciljnaRotacija){
+                this.duhec.rotation[1] += 1*Math.PI/180
+            }
+        }
+        ////////
+
         this.camera.update(dt, this.scene.nodes[1]);
         this.camera.updateModel(dt, this.scene.nodes[1])
         this.physics.update(dt);
