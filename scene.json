@@ -35,8 +35,8 @@
     },
     {
       "type": "model",
-      "mesh": 0,
-      "texture": 2,
+      "mesh": 2,
+      "texture": 4,
       "aabb": {
         "min": [-1, -1, -1],
         "max": [1, 1, 1]
@@ -81,6 +81,7 @@
   ],
   "meshes": [
     "./models/cube.json",
-    "./models/plane.json"
+    "./models/plane.json",
+    "./models/ograja.json"
   ]
 }
