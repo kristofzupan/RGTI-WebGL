@@ -68,11 +68,42 @@ export class Physics {
             return;
         }
 
-        if ((a === this.scene.nodes[5] && b === this.scene.nodes[1]) || (a === this.scene.nodes[1] && b === this.scene.nodes[5])) {
-            this.scene.nodes.splice(5, 1)
+        if ((a === this.scene.nodes[this.scene.nodes.length-1] && b === this.scene.nodes[1]) || (a === this.scene.nodes[1] && b === this.scene.nodes[this.scene.nodes.length-1])) {
+            this.scene.nodes.splice(this.scene.nodes.length-1, 1)
             this.scene.nodes[0].disable()
             document.getElementById('konec').style.display = 'block';
-            document.getElementById('izpisCas').innerHTML = document.getElementById("cas").innerHTML;
+            document.getElementById('izpisCas').innerHTML = document.getElementById("cas").innerHTML; // duhec 00:36:164
+            const cas = document.getElementById('izpisCas').innerHTML;
+            let win = true;
+            if (cas[0] > 0 || cas[1] > 0) {
+                win = false;
+            } else if (cas[3] > 3) {
+                win = false;
+            } else if (cas[3] < 3) {
+                win = true;
+            } else if (cas[4] > 6) {
+                win = false
+            } else if (cas[4] < 6) {
+                win = true;
+            } else if (cas[6] > 1) {
+                win = false
+            } else if (cas[6] < 1) {
+                win = true
+            } else if (cas[7] > 6) {
+                win = false
+            } else if (cas[7] < 6) {
+                win = true
+            } else if (cas[8] > 4) {
+                win = false
+            } else {
+                win = true;
+            }
+            if (win) {
+                document.getElementById('zmaga').style.display = 'block';
+            } else {
+                document.getElementById('zguba').style.display = 'block';
+            }
+
         }
         // Move node A minimally to avoid collision.
         const diffa = vec3.sub(vec3.create(), bBox.max, aBox.min);

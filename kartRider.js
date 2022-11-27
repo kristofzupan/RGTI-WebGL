@@ -16,16 +16,17 @@ class App extends Application {
         this.renderer = new Renderer(gl);
         this.aspect = 1;
         
+
+
+        this.pathGhost = [[-41, 1, 32],[-58, 1, 66],[-80, 1, 65],[-81, 1, -7],[-64, 1, -66],[67, 1, -66],[66, 1, 67],[8, 1, 66],[-1, 1, 32], [-18, 1, 26]];
+        this.pathGhostRotation = [[0, 2.478, 0],[0, 1.64, 0],[0, 0.09, 0],[0, -0.27, 0],[0, -1.375, 0],[0, -3, 0],[0, -4.61, 0],[0, -6.11, 0],[0, -4.88, 0],[0, -4.76, 0]]
+        await this.load('scene.json');
         this.casZacetka = Date.now()
         this.casElement = document.getElementById("cas");
-
-        this.pathGhost = [[-30, 1, -5],[-30, 1, -30],[1, 1, -30],[1, 1, -5]];
-        this.pathGhostRotation = [[0, Math.PI/2, 0],[0, Math.PI, 0],[0, -Math.PI/2, 0],[0, 0, 0]]
-        await this.load('scene.json');
-
         this.canvas.addEventListener('click', e => this.canvas.requestPointerLock());
         document.addEventListener('pointerlockchange', e => {
             if (document.pointerLockElement === this.canvas) {
+
                 this.camera.enable();
             } else {
                 this.camera.disable();
@@ -66,7 +67,10 @@ class App extends Application {
         this.startTime = this.time;
 
         //// Duhec pot in rotatcija
-        this.duhec = this.scene.nodes[4];
+
+        this.duhec = this.scene.nodes[this.scene.nodes.length-2];
+        //console.log(this.scene.nodes[1].translation + " - " + this.scene.nodes[1].rotation)
+        //console.log(this.duhec.translation + " - " + this.duhec.rotation)
 
         let rotacija = Math.round(this.duhec.rotation[1] * (180/Math.PI))
         let ciljnaRotacija = Math.round(this.pathGhostRotation[this.duhec.pathIndex][1] * (180/Math.PI))
@@ -83,24 +87,24 @@ class App extends Application {
         if (Math.round(this.duhec.translation[0]) === this.pathGhost[this.duhec.pathIndex][0]) {
             this.duhec.translation[0] = Math.round(this.duhec.translation[0])
         } else if (this.duhec.translation[0] > this.pathGhost[this.duhec.pathIndex][0]) {
-            this.duhec.translation[0] -= 8*dt
+            this.duhec.translation[0] -= 16*dt
         } else if (this.duhec.translation[0] < this.pathGhost[this.duhec.pathIndex][0]){
-            this.duhec.translation[0] += 8*dt
+            this.duhec.translation[0] += 16*dt
         }
 
         if (Math.round(this.duhec.translation[2]) === this.pathGhost[this.duhec.pathIndex][2]) {
             this.duhec.translation[2] = Math.round(this.duhec.translation[2])
         } else if (this.duhec.translation[2] > this.pathGhost[this.duhec.pathIndex][2]) {
-            this.duhec.translation[2] -= 8*dt
+            this.duhec.translation[2] -= 16*dt
         } else if (this.duhec.translation[2] < this.pathGhost[this.duhec.pathIndex][2]){
-            this.duhec.translation[2] += 8*dt
+            this.duhec.translation[2] += 16*dt
         }
         ///// Duhec rotacija
         const razdalja = Math.sqrt(((this.pathGhost[this.duhec.pathIndex][0]-this.duhec.translation[0])*(this.pathGhost[this.duhec.pathIndex][0]-this.duhec.translation[0])) + ((this.duhec.translation[2]-this.pathGhost[this.duhec.pathIndex][2])*(this.duhec.translation[2]-this.pathGhost[this.duhec.pathIndex][2])))
         if (Math.round(razdalja) === 0) {
             this.duhec.rotation[1] = this.pathGhostRotation[this.duhec.pathIndex][1]
         }
-        if (razdalja < 10) {
+        if (razdalja < 20) {
             rotacija = Math.round(this.duhec.rotation[1] * (180/Math.PI))
             ciljnaRotacija = Math.round(this.pathGhostRotation[this.duhec.pathIndex][1] * (180/Math.PI))
             if (rotacija === ciljnaRotacija) {
