@@ -68,8 +68,8 @@ export class Physics {
             return;
         }
 
-        if ((a === this.scene.nodes[5] && b === this.scene.nodes[1]) || (a === this.scene.nodes[1] && b === this.scene.nodes[5])) {
-            this.scene.nodes.splice(5, 1)
+        if ((a === this.scene.nodes[this.scene.nodes.length-1] && b === this.scene.nodes[1]) || (a === this.scene.nodes[1] && b === this.scene.nodes[this.scene.nodes.length-1])) {
+            this.scene.nodes.splice(this.scene.nodes.length-1, 1)
             this.scene.nodes[0].disable()
             document.getElementById('konec').style.display = 'block';
             document.getElementById('izpisCas').innerHTML = document.getElementById("cas").innerHTML;

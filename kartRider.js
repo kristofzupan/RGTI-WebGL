@@ -16,16 +16,17 @@ class App extends Application {
         this.renderer = new Renderer(gl);
         this.aspect = 1;
         
-        this.casZacetka = Date.now()
-        this.casElement = document.getElementById("cas");
+
 
         this.pathGhost = [[-30, 1, -5],[-30, 1, -30],[1, 1, -30],[1, 1, -5]];
         this.pathGhostRotation = [[0, Math.PI/2, 0],[0, Math.PI, 0],[0, -Math.PI/2, 0],[0, 0, 0]]
         await this.load('scene.json');
-
+        this.casZacetka = Date.now()
+        this.casElement = document.getElementById("cas");
         this.canvas.addEventListener('click', e => this.canvas.requestPointerLock());
         document.addEventListener('pointerlockchange', e => {
             if (document.pointerLockElement === this.canvas) {
+
                 this.camera.enable();
             } else {
                 this.camera.disable();
@@ -66,7 +67,7 @@ class App extends Application {
         this.startTime = this.time;
 
         //// Duhec pot in rotatcija
-        this.duhec = this.scene.nodes[4];
+        this.duhec = this.scene.nodes[this.scene.nodes.length-2];
 
         let rotacija = Math.round(this.duhec.rotation[1] * (180/Math.PI))
         let ciljnaRotacija = Math.round(this.pathGhostRotation[this.duhec.pathIndex][1] * (180/Math.PI))
