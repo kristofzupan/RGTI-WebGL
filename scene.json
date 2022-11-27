@@ -301,8 +301,8 @@
         "min": [0, 0, 0],
         "max": [0, 0, 0]
       },
-      "translation": [1, 1, -5],
-      "rotation": [0, 0, 0],
+      "translation": [-15, 1, 15],
+      "rotation": [0, 1.57, 0],
       "scale": [1, 1, 1],
       "transmittance": 0.7
     },
