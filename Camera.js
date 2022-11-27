@@ -92,7 +92,7 @@ export class Camera extends Node {
 
     update(dt, model) {
         const c = this;
-        c.rotation[0] = -Math.PI/6; c.rotation[1] = model.rotation[1]; c.rotation[2] = model.rotation[2];
+        c.rotation[0] = -Math.PI/8; c.rotation[1] = model.rotation[1]; c.rotation[2] = model.rotation[2];
         c.translation[0] = model.translation[0]; c.translation[1] = model.translation[1] +2; c.translation[2] = model.translation[2];
     }
 

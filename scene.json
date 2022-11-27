@@ -16,7 +16,7 @@
     {
       "type": "model",
       "mesh": 0,
-      "texture": 0,
+      "texture": 2,
       "aabb": {
         "min": [-1, -1, -1],
         "max": [1, 1, 1]
@@ -32,14 +32,56 @@
       "translation": [0, 0, 0],
       "rotation": [0, 0, 0],
       "scale": [100, 1, 100]
+    },
+    {
+      "type": "model",
+      "mesh": 2,
+      "texture": 4,
+      "aabb": {
+        "min": [-1, -1, -1],
+        "max": [1, 1, 1]
+      },
+      "translation": [0, 1, -1],
+      "rotation": [0, 0, 0],
+      "scale": [1, 1, 1]
+    },
+    {
+      "type": "model",
+      "mesh": 0,
+      "texture": 3,
+      "aabb": {
+        "min": [0, 0, 0],
+        "max": [0, 0, 0]
+      },
+      "translation": [1, 1, -5],
+      "rotation": [0, 0, 0],
+      "scale": [1, 1, 1],
+      "transmittance": 0.7
+    },
+    {
+      "type": "model",
+      "mesh": 0,
+      "texture": 4,
+      "aabb": {
+        "min": [-1, -1, -1],
+        "max": [1, 1, 1]
+      },
+      "translation": [-15, 1, 24],
+      "rotation": [0, 1.57, 0],
+      "scale": [10, 5, 0.1],
+      "transmittance": 0.1
     }
   ],
   "textures": [
     "./images/16x16.png",
-    "./images/track.png"
+    "./images/track.png",
+    "./images/slon.png",
+    "./images/zirafa.png",
+    "./images/black.png"
   ],
   "meshes": [
     "./models/cube.json",
-    "./models/plane.json"
+    "./models/plane.json",
+    "./models/ograja.json"
   ]
 }

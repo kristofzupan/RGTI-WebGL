@@ -68,6 +68,9 @@ Node.defaults = {
     frictionX: 0.01,
     frictionY: 0.2,
     acceleration: 15,
+    transmittance: 1,
+    path: 0,
+    pathIndex: 0,
     aabb: {
         min: [0, 0, 0],
         max: [0, 0, 0],
